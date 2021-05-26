@@ -7,6 +7,11 @@ Coord turnCPU(Field& f) {
 	srand(time(0));
 	Coord c = { 0 };
 	
+	if (f.ppField[1][1] == EMPTY) {
+		return { 1, 1 };
+	}
+
+
 	for (size_t y = 0; y < f.SIZE; y++) {
 		for (size_t x = 0; x < f.SIZE; x++) {
 			if (f.ppField[y][x] == EMPTY) {
@@ -37,16 +42,13 @@ Coord turnCPU(Field& f) {
 		}
 	}
 
-	if (f.ppField[1][1] == EMPTY) {
-		return { 1, 1 };
-	}
 
 	//========================================
-	size_t maxTry = 100;
+	size_t maxTry = 1000;
 	while (maxTry > 0)
 	{
-		size_t x_rand = (rand() % 2);
-		size_t y_rand = (rand() % 2);
+		size_t x_rand = (rand() % 3);
+		size_t y_rand = (rand() % 3);
 		if (f.ppField[y_rand][x_rand] == EMPTY) {
 			c.y = y_rand;
 			c.x = x_rand;
@@ -54,9 +56,6 @@ Coord turnCPU(Field& f) {
 		}
 		maxTry--;
 	}
-
-
-
 
 
 	//========================================

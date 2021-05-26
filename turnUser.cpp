@@ -1,5 +1,6 @@
 #include "CrossZeroGame.h"
 #include <iostream>
+#include <Windows.h>
 
 Coord turnUser(Field& f) {
 	Coord c = { 0 };
@@ -13,7 +14,10 @@ Coord turnUser(Field& f) {
 			return c;
 		}
 		else {
-			std::cout << "Cell is occuped!" << std::endl;
+			std::cout << "   Cell is occuped!" << std::endl;
+			Sleep(1000);
+			clearConsole();
+			drawField(f);
 		}
 	}
 

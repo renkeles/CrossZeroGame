@@ -7,7 +7,6 @@ int main() {
 	drawField(f);
 
 	
-	
 	do {
 
 		f.game = runGame(f);
@@ -25,8 +24,6 @@ int main() {
 		}
 	} while (f.game == IN_PROCESS);
 	
-
-
 	deInitField(f);
 
 
