@@ -28,5 +28,8 @@ int main() {
 
 
 	deInitField(f);
+
+
+	system("pause");
 	return 0;
 }

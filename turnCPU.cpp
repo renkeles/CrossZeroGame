@@ -1,13 +1,17 @@
 #include "CrossZeroGame.h"
+#include <stdlib.h>
+#include <time.h>
+#include <iostream>
 
 Coord turnCPU(Field& f) {
+	srand(time(0));
 	Coord c = { 0 };
 	
 	for (size_t y = 0; y < f.SIZE; y++) {
 		for (size_t x = 0; x < f.SIZE; x++) {
 			if (f.ppField[y][x] == EMPTY) {
 				f.ppField[y][x] = f.ai;
-				if (f.game == CPU_WIN) {
+				if (isWin(f) == CPU_WIN) {
 					f.ppField[y][x] = EMPTY;
 					c.y = y;
 					c.x = x;
@@ -22,7 +26,7 @@ Coord turnCPU(Field& f) {
 		for (size_t x = 0; x < f.SIZE; x++) {
 			if (f.ppField[y][x] == EMPTY) {
 				f.ppField[y][x] = f.user;
-				if (f.game == USER_WIN) {
+				if (isWin(f) == USER_WIN) {
 					f.ppField[y][x] = EMPTY;
 					c.y = y;
 					c.x = x;
@@ -37,41 +41,22 @@ Coord turnCPU(Field& f) {
 		return { 1, 1 };
 	}
 
-	//=======================
-
-	if (f.ppField[0][0] == EMPTY) {
-		return { 0, 0 };
+	//========================================
+	size_t maxTry = 100;
+	while (maxTry > 0)
+	{
+		size_t x_rand = (rand() % 2);
+		size_t y_rand = (rand() % 2);
+		if (f.ppField[y_rand][x_rand] == EMPTY) {
+			c.y = y_rand;
+			c.x = x_rand;
+			return c;
+		}
+		maxTry--;
 	}
 
-	if (f.ppField[0][2] == EMPTY) {
-		return { 0, 2 };
-	}
 
-	if (f.ppField[2][0] == EMPTY) {
-		return { 2, 0 };
-	}
 
-	if (f.ppField[2][2] == EMPTY) {
-		return { 2, 2 };
-	}
-
-	//=======================
-
-	if (f.ppField[0][1] == EMPTY) {
-		return { 0, 1 };
-	}
-
-	if (f.ppField[1][0] == EMPTY) {
-		return { 1, 0 };
-	}
-
-	if (f.ppField[1][2] == EMPTY) {
-		return { 1, 2 };
-	}
-
-	if (f.ppField[2][1] == EMPTY) {
-		return { 2, 1 };
-	}
 
 
 	//========================================
